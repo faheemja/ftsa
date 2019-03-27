@@ -1,0 +1,11 @@
+library(vars)
+x = read.csv("C:/users/Khan/Desktop/TempAsia.csv")
+View(x)
+attach(x)
+tokyomin = diff(TokyoMin)
+tokyomax = diff(TokyoMax)# for the stationarity we take the diiference of each variable
+bangkomin = diff(BangkokMin)
+bangkomax = diff(BangkokMax)
+temp = cbind(tokyomax, bangkomax, tokyomin, bangkomin)#all four  stationarity variables are combined for fiting VAR model
+temp_var=VAR(temp, type = "const", lag.max = 10, ic = "AIC")
+temp_var
